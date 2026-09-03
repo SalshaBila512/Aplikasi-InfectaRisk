@@ -370,27 +370,37 @@ elif menu == "Input Gejala & Prediksi":
     gejala = {}
     cols = st.columns(2)
 
-    label_gejala = {
-        "G1": "Batuk > 2 minggu",
-        "G2": "Batuk Berdarah",
-        "G3": "Demam Lama",
-        "G4": "Keringat Malam",
-        "G5": "BB Turun",
-        "G6": "Demam Tinggi",
-        "G7": "Nyeri Sendi",
-        "G8": "Mual/Muntah",
-        "G9": "Ruam Kulit",
-        "G10": "Trombosit Rendah",
-        "G11": "Batuk Kering/ Berdahak",
-        "G12": "Pilek",
-        "G13": "Sakit Tenggorokan",
-        "G14": "Sesak Nafas"
-    }
+    label_gejala = [
+        "Batuk > 2 minggu",
+        "Batuk Berdarah",
+        "Demam Lama",
+        "Keringat Malam",
+        "BB Turun",
+        "Demam Tinggi",
+        "Nyeri Sendi",
+        "Mual/Muntah",
+        "Ruam Kulit",
+        "Sakit Kepala",
+        "Batuk Kering/Berdahak",
+        "Pilek",
+        "Sakit Tenggorokan",
+        "Sesak Nafas"
+    ]
 
     # checkbox gejala
-    for i, (kode, label) in enumerate(label_gejala.items()):
-        with cols[i % 2]:
-            gejala[kode] = st.checkbox(f"{kode} - {label}")
+    gejala = {}
+
+    col1, col2 = st.columns(2)
+
+    for i, label in enumerate(label_gejala):
+        kode = f"G{i+1}"
+
+        if i < 7:
+            with col1:
+                gejala[kode] = st.checkbox(label, key=kode)
+        else:
+            with col2:
+                gejala[kode] = st.checkbox(label, key=kode)
 
     # tombol analisis
     if st.button("🔍 Analisis Sekarang"):
